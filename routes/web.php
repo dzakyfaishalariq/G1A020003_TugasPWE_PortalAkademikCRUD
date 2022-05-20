@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('mulai');
+    return view('mulai', ['title' => 'Home']);
+});
+Route::get('/tabel', function () {
+    return view('tabel', ['title' => 'Tabel']);
+});
+Route::get('/mahasiwa', function () {
+    return view('mahasiswa', ['title' => 'Form-Mahasiswa']);
 });
