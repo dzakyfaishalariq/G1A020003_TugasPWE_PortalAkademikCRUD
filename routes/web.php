@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\mahasiswaController;
+use App\Models\studen;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +19,18 @@ Route::get('/', function () {
     return view('mulai', ['title' => 'Home']);
 });
 Route::get('/tabel', function () {
-    return view('tabel', ['title' => 'Tabel']);
+    #tampilkan data dari database studen
+    $studens = studen::all();
+    return view(
+        'tabel',
+        [
+            'title' => 'Tabel',
+            'studens' => $studens
+        ]
+    );
 });
-Route::get('/mahasiwa', function () {
-    return view('mahasiswa', ['title' => 'Form-Mahasiswa']);
-});
+Route::get('/mahasiswa', [mahasiswaController::class, 'index']);
+Route::post('/mahasiswa/tambah', [mahasiswaController::class, 'create']);
+Route::get('/mahasiswa/hapus/{id}', [mahasiswaController::class, 'delete']);
+#Route::get('/mahasiswa/edit/{studen}', [mahasiswaController::class, 'show']);
+Route::put('/mahasiswa/ubah/{studen}', [mahasiswaController::class, 'update']);
