@@ -122,8 +122,8 @@ class mahasiswaController extends Controller
     }
     public function delete(Request $request, studen $id)
     {
-        //
+        //membuat pemilihan apakah mau menghapus atau tidak
         $id->delete();
-        return redirect('/tabel');
+        return redirect('/tabel')->with('success', 'Data Berhasil Dihapus');
     }
 }

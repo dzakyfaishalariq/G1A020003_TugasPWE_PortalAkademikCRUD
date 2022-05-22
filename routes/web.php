@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\prodi;
+use App\Models\studen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\prodiController;
 use App\Http\Controllers\mahasiswaController;
-use App\Models\studen;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +23,13 @@ Route::get('/', function () {
 Route::get('/tabel', function () {
     #tampilkan data dari database studen
     $studens = studen::all();
+    $prodi = prodi::all();
     return view(
         'tabel',
         [
             'title' => 'Tabel',
-            'studens' => $studens
+            'studens' => $studens,
+            'prodi' => $prodi
         ]
     );
 });
@@ -34,3 +38,9 @@ Route::post('/mahasiswa/tambah', [mahasiswaController::class, 'create']);
 Route::get('/mahasiswa/hapus/{id}', [mahasiswaController::class, 'delete']);
 #Route::get('/mahasiswa/edit/{studen}', [mahasiswaController::class, 'show']);
 Route::put('/mahasiswa/ubah/{studen}', [mahasiswaController::class, 'update']);
+
+// prodi
+Route::get('/prodi', [prodiController::class, 'index']);
+Route::post('/prodi/tambah', [prodiController::class, 'create']);
+Route::put('/prodi/edit/{prodi}', [prodiController::class, 'update']);
+Route::get('/prodi/hapus/{prodi}', [prodiController::class, 'destroy']);
